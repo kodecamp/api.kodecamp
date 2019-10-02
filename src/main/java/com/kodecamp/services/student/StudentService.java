@@ -26,12 +26,13 @@ public class StudentService extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    System.out.println("method : doGet");
+    System.out.println("method : doGet ********************");
 
     final ObjectMapper mapper = new ObjectMapper();
 
     final String jsonString = mapper.writerWithDefaultPrettyPrinter()
         .writeValueAsString(this.students);
+    resp.setContentType("application/json");
     final PrintWriter writer = resp.getWriter();
     writer.write(jsonString);
     writer.close();
@@ -57,13 +58,13 @@ public class StudentService extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     System.out.println("Method : Post");
-    final String jsonString = req.getParameter("student");
-    System.out.println("request param " + jsonString);
+
     final ObjectMapper mapper = new ObjectMapper();
     final StudentDto newStudent = mapper.readValue(req.getInputStream(),
         StudentDto.class);
     System.out.println("New Student" + newStudent);
     this.students.add(newStudent);
+    resp.setContentType("application/json");
     resp.getWriter()
         .write(mapper.writeValueAsString(newStudent));
   }

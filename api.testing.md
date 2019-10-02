@@ -1,5 +1,7 @@
 *-------------------- Get Request -------------------- 
-curl --request GET http://localhost:8080/api.kodecamp/student
+curl \
+--request GET \
+http://localhost:8080/api.kodecamp/student  && echo "\n"
 
 -------------------** Post Request -------------------- 
 curl \
